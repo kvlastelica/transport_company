@@ -9,7 +9,7 @@ There are four apps/microservices :
 
 | Application | URL | Description |
 | --- | --- | --- |
-transambackoffice |     http://localhost:8080  |  internal back office app for managing departments , employees  ....
+transambackoffice |     http://localhost:8081  |  internal back office app for managing departments , employees  ....
 transamstore    |       http://localhost:8080  |  external store for individual/business customers
 transaminvoice   |      http://localhost:8081  |  internal app for handling invoices
 transamnotification  |  http://localhost:8082  |  internal endpoint for sending notifications
