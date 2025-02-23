@@ -32,7 +32,7 @@ application {
     serverPort 8081
     skipUserManagement true
   }
-  entities *
+  entities Invoice
 }
 
 application {
@@ -103,7 +103,7 @@ entity OrderItem {
 }
 
 relationship OneToOne {
-    Customer{user(login) required} to User with builtInEntity
+    Customer to User with builtInEntity
 }
 
 relationship ManyToOne {
@@ -121,6 +121,7 @@ paginate Ticket, Customer, TicketOrder, OrderItem with pagination
 /* Entities for Invoice microservice */
 entity Invoice {
     code String required
+    ticketOrderCode String required
     date Instant required
     details String
     status InvoiceStatus required
@@ -180,7 +181,7 @@ entity Employee{
 }
 
 relationship OneToMany {
-    Department{employee} to Employee{department(deparmentName) required}
+    Department{employee} to Employee{department(departmentName) required}
 }
 
 entity Vehicle {
@@ -200,7 +201,7 @@ entity Route {
     description String required
     start String  required 
     destination String required
-    passangerCapacity Integer required
+    passengerCapacity Integer required
     parcelTotalWeight BigDecimal required
 
 }
@@ -224,16 +225,15 @@ relationship ManyToMany {
     Route{vehicle} to Vehicle{route(code) required}
 }
 
-relationship ManyToOne {
-    TicketOrder{routeschedule} to RouteSchedule{route(code) required}
+// relationship ManyToOne {
+//     TicketOrder{routeschedule} to RouteSchedule{route(code) required}
+// }
+
+
+
+deployment {
+  deploymentType docker-compose
+  appsFolders [invoice, notification, store]
+  dockerRepositoryName "mraible"
 }
-
-relationship OneToOne {
-    TicketOrder{invoice} to Invoice{ticketorder(code) required}
-}
-
-
-
-
-
 
