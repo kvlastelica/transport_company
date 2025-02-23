@@ -1,33 +1,46 @@
 /*
- * This is a microservice e-commerce store sample with Gateway and two microservice applications
- * This uses Istio for native kubernetes service discovery and JWT authentication
+ * This is a transportation company TRANS-AM ERP with two Gateway and two microservice applications
  */
  
 application {
   config {
-    baseName store
+    baseName transamstore
     applicationType gateway
-    packageName com.jhipster.demo.store
+    packageName com.transam.store
     serviceDiscoveryType no
     authenticationType jwt
     prodDatabaseType mysql
     cacheProvider no
     buildTool maven
     clientFramework angularX
-    testFrameworks [cypress]
-    reactive true
   }
-  entities *
+  entities Customer, Ticket, TicketOrder, OrderItem
 }
 
 application {
   config {
-    baseName invoice
-    applicationType microservice
-    packageName com.jhipster.demo.invoice
+    baseName transambackoffice
+    applicationType gateway
+    packageName com.transam.backoffice
     serviceDiscoveryType no
     authenticationType jwt
     prodDatabaseType mysql
+    cacheProvider no
+    buildTool maven
+    clientFramework angularX
+  }
+  entities Department, Employee, Vehicle, Route, RouteSchedule
+}
+
+application {
+  config {
+    baseName transaminvoice
+    applicationType microservice
+    packageName com.transam.invoice
+    serviceDiscoveryType no
+    authenticationType jwt
+    prodDatabaseType mysql
+    cacheProvider no
     buildTool maven
     serverPort 8081
     skipUserManagement true
@@ -37,14 +50,13 @@ application {
 
 application {
   config {
-    baseName notification
+    baseName transamnotification
     applicationType microservice
-    packageName com.jhipster.demo.notification
+    packageName com.transam.notification
     serviceDiscoveryType no
     authenticationType jwt
     databaseType mongodb
     prodDatabaseType mongodb
-    devDatabaseType mongodb
     cacheProvider no
     enableHibernateCache false
     buildTool maven
@@ -120,6 +132,7 @@ paginate Ticket, Customer, TicketOrder, OrderItem with pagination
 
 /* Entities for Invoice microservice */
 entity Invoice {
+    id String required
     code String required
     ticketOrderCode String required
     date Instant required
@@ -146,6 +159,7 @@ microservice Invoice with invoice
 /* Entities for notification microservice */
 
 entity Notification {
+    id String required
     date Instant required
     details String
     sentDate Instant required
@@ -160,6 +174,8 @@ enum NotificationType {
 
 microservice Notification with notification
 
+
+/* Entities for backoffice app */
 
 entity Department {
 	departmentName String required
@@ -183,6 +199,11 @@ entity Employee{
 relationship OneToMany {
     Department{employee} to Employee{department(departmentName) required}
 }
+
+relationship OneToOne {
+    Employee to User with builtInEntity
+}
+
 
 entity Vehicle {
 	code String required
@@ -233,7 +254,12 @@ relationship ManyToMany {
 
 deployment {
   deploymentType docker-compose
-  appsFolders [invoice, notification, store]
-  dockerRepositoryName "mraible"
+  appsFolders [transaminvoice, transamnotification, transamstore, transambackoffice]
+  dockerRepositoryName "transam"
 }
 
+deployment {
+  deploymentType kubernetes
+  appsFolders [transaminvoice, transamnotification, transamstore,transambackoffice]
+  dockerRepositoryName "transam"
+}
