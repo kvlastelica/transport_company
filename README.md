@@ -14,7 +14,7 @@ transamstore    |       http://localhost:8080  |  external store for individual/
 transaminvoice   |      http://localhost:8081  |  internal app for handling invoices
 transamnotification  |  http://localhost:8082  |  internal endpoint for sending notifications
 
-## Starting and using apps
+# Starting and using apps
 
 Go to wanted app folder and type:
 
@@ -27,7 +27,7 @@ Type "admin", "admin" for username and password.
 You can browse for db entites or test endpoints with adminstration menu
 
 
-### Future
+# Future
 
 We want to build upon this POC towards architecture shown in the image:
 ![image info](./resources/TransAM_Generic_Architecture.png)
