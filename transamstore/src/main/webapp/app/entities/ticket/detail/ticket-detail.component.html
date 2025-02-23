@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ticket(); as ticketRef) {
+      <div>
+        <h2 data-cy="ticketDetailsHeading"><span jhiTranslate="transamstoreApp.ticket.detail.title">Ticket</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ ticketRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticket.name">Name</span></dt>
+          <dd>
+            <span>{{ ticketRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticket.description">Description</span></dt>
+          <dd>
+            <span>{{ ticketRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticket.price">Price</span></dt>
+          <dd>
+            <span>{{ ticketRef.price }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticket.productSize">Product Size</span></dt>
+          <dd>
+            <span [jhiTranslate]="'transamstoreApp.TicketType.' + (ticketRef.productSize ?? 'null')">{{
+              {
+                null: '',
+                PASSENGER: 'PASSENGER',
+                PASSENGER_KID: 'PASSENGER_KID',
+                PARCEL_M: 'PARCEL_M',
+                PARCEL_L: 'PARCEL_L',
+                PARCEL_XL: 'PARCEL_XL',
+                PARCEL_XXL: 'PARCEL_XXL',
+              }[ticketRef.productSize ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticket.image">Image</span></dt>
+          <dd>
+            @if (ticketRef.image) {
+              <div>
+                <a (click)="openFile(ticketRef.image ?? '', ticketRef.imageContentType)">
+                  <img [src]="'data:' + ticketRef.imageContentType + ';base64,' + ticketRef.image" style="max-width: 100%" alt="ticket" />
+                </a>
+                {{ ticketRef.imageContentType }}, {{ byteSize(ticketRef.image ?? '') }}
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ticket', ticketRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

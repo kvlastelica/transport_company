@@ -1,0 +1,28 @@
+{
+  "transambackofficeApp": {
+    "routeSchedule": {
+      "home": {
+        "title": "Route Schedules",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Route Schedule",
+        "createOrEditLabel": "Create or edit a Route Schedule",
+        "notFound": "No Route Schedules found"
+      },
+      "created": "A new Route Schedule is created with identifier {{ param }}",
+      "updated": "A Route Schedule is updated with identifier {{ param }}",
+      "deleted": "A Route Schedule is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Route Schedule {{ id }}?"
+      },
+      "detail": {
+        "title": "Route Schedule"
+      },
+      "id": "ID",
+      "code": "Code",
+      "description": "Description",
+      "departure": "Departure",
+      "arrival": "Arrival",
+      "route": "Route"
+    }
+  }
+}

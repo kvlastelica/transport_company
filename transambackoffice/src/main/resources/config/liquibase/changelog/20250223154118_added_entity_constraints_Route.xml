@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Route.
+    -->
+    <changeSet id="20250223154118-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="route_id"
+                                 baseTableName="rel_route__employee"
+                                 constraintName="fk_rel_route__employee__route_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="route"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="employee_id"
+                                 baseTableName="rel_route__employee"
+                                 constraintName="fk_rel_route__employee__employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="route_id"
+                                 baseTableName="rel_route__vehicle"
+                                 constraintName="fk_rel_route__vehicle__route_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="route"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="vehicle_id"
+                                 baseTableName="rel_route__vehicle"
+                                 constraintName="fk_rel_route__vehicle__vehicle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vehicle"
+                                 />
+    </changeSet>
+</databaseChangeLog>

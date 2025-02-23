@@ -1,0 +1,13 @@
+{
+  "transambackofficeApp": {
+    "VehicleType": {
+      "null": "",
+      "CAR": "CAR",
+      "VAN": "VAN",
+      "BUS": "BUS",
+      "TRUCK": "TRUCK",
+      "SHIP": "SHIP",
+      "PLANE": "PLANE"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "transamstoreApp": {
+    "ticketOrder": {
+      "home": {
+        "title": "Ticket Orders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ticket Order",
+        "createOrEditLabel": "Create or edit a Ticket Order",
+        "notFound": "No Ticket Orders found"
+      },
+      "created": "A new Ticket Order is created with identifier {{ param }}",
+      "updated": "A Ticket Order is updated with identifier {{ param }}",
+      "deleted": "A Ticket Order is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ticket Order {{ id }}?"
+      },
+      "detail": {
+        "title": "Ticket Order"
+      },
+      "id": "ID",
+      "placedDate": "Placed Date",
+      "status": "Status",
+      "code": "Code",
+      "invoiceId": "Invoice Id",
+      "orderItem": "Order Item",
+      "customer": "Customer"
+    }
+  }
+}

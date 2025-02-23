@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (department(); as departmentRef) {
+      <div>
+        <h2 data-cy="departmentDetailsHeading"><span jhiTranslate="transambackofficeApp.department.detail.title">Department</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ departmentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.department.departmentName">Department Name</span></dt>
+          <dd>
+            <span>{{ departmentRef.departmentName }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.department.location">Location</span></dt>
+          <dd>
+            <span>{{ departmentRef.location }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.department.division">Division</span></dt>
+          <dd>
+            <span>{{ departmentRef.division }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.department.format">Format</span></dt>
+          <dd>
+            <span [jhiTranslate]="'transambackofficeApp.DepartmentType.' + (departmentRef.format ?? 'null')">{{
+              {
+                null: '',
+                TICKETING: 'TICKETING',
+                CONTROLLING: 'CONTROLLING',
+                DRIVING: 'DRIVING',
+                MAINTENANCE: 'MAINTENANCE',
+                ACCOUNTING: 'ACCOUNTING',
+                MARKETING: 'MARKETING',
+                SALES: 'SALES',
+                PROCUREMENT: 'PROCUREMENT',
+              }[departmentRef.format ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/department', departmentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

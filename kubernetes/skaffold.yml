@@ -1,0 +1,21 @@
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+    - image: transam/transaminvoice
+      context: ../transaminvoice
+      jib: {}
+    - image: transam/transamnotification
+      context: ../transamnotification
+      jib: {}
+    - image: transam/transamstore
+      context: ../transamstore
+      jib: {}
+    - image: transam/transambackoffice
+      context: ../transambackoffice
+      jib: {}
+  tagPolicy:
+    envTemplate:
+      template: "{{.IMAGE_NAME}}:latest"
+deploy:
+  kustomize: {}

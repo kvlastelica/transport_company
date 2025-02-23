@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (routeSchedule(); as routeScheduleRef) {
+      <div>
+        <h2 data-cy="routeScheduleDetailsHeading">
+          <span jhiTranslate="transambackofficeApp.routeSchedule.detail.title">Route Schedule</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ routeScheduleRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.routeSchedule.code">Code</span></dt>
+          <dd>
+            <span>{{ routeScheduleRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.routeSchedule.description">Description</span></dt>
+          <dd>
+            <span>{{ routeScheduleRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.routeSchedule.departure">Departure</span></dt>
+          <dd>
+            <span>{{ routeScheduleRef.departure | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.routeSchedule.arrival">Arrival</span></dt>
+          <dd>
+            <span>{{ routeScheduleRef.arrival | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.routeSchedule.route">Route</span></dt>
+          <dd>
+            @if (routeSchedule()!.route) {
+              <div>
+                <a [routerLink]="['/route', routeSchedule()!.route?.id, 'view']">{{ routeScheduleRef.route?.code }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/route-schedule', routeScheduleRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

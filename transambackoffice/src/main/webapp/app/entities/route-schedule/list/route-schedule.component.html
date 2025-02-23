@@ -1,0 +1,121 @@
+<div>
+  <h2 id="page-heading" data-cy="RouteScheduleHeading">
+    <span jhiTranslate="transambackofficeApp.routeSchedule.home.title">Route Schedules</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="transambackofficeApp.routeSchedule.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-route-schedule"
+        [routerLink]="['/route-schedule/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="transambackofficeApp.routeSchedule.home.createLabel">Create a new Route Schedule</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (routeSchedules().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="transambackofficeApp.routeSchedule.home.notFound">No Route Schedules found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.routeSchedule.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.routeSchedule.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="departure">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.routeSchedule.departure">Departure</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="arrival">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.routeSchedule.arrival">Arrival</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="route.code">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.routeSchedule.route">Route</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (routeSchedule of routeSchedules(); track trackId(routeSchedule)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/route-schedule', routeSchedule.id, 'view']">{{ routeSchedule.id }}</a>
+              </td>
+              <td>{{ routeSchedule.code }}</td>
+              <td>{{ routeSchedule.description }}</td>
+              <td>{{ routeSchedule.departure | formatMediumDatetime }}</td>
+              <td>{{ routeSchedule.arrival | formatMediumDatetime }}</td>
+              <td>
+                @if (routeSchedule.route) {
+                  <div>
+                    <a [routerLink]="['/route', routeSchedule.route.id, 'view']">{{ routeSchedule.route.code }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/route-schedule', routeSchedule.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/route-schedule', routeSchedule.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(routeSchedule)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

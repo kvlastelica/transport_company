@@ -1,0 +1,25 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 1,
+    "applicationType": "gateway",
+    "authenticationType": "jwt",
+    "baseName": "transambackoffice",
+    "buildTool": "maven",
+    "cacheProvider": "no",
+    "clientFramework": "angular",
+    "devServerPort": 4201,
+    "entities": ["Department", "Employee", "Vehicle", "Route", "RouteSchedule"],
+    "jhipsterVersion": "8.9.0",
+    "jwtSecretKey": "YjA4ZDhkMzQ5ZGExY2Y3Yjk0MDNlYWJmNjUzZWY1ZjJmOTA4ODA3ZDU1ZmE1OGY4MTlhNTViOWQyNDg4YTI0MTQzYWU1NmZlOGM5YzI0YjBmYTE5YzI4ZGMwODliNzdkYzU2MWE3Nzk2MTE0MzNjMjEwNTU1YjQwMGMwZWU2YTM=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1740325338000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "com.transam.backoffice",
+    "prodDatabaseType": "mysql",
+    "reactive": true,
+    "serverPort": 8081,
+    "serviceDiscoveryType": "no",
+    "skipCommitHook": true
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 3,
+    "applicationType": "gateway",
+    "authenticationType": "jwt",
+    "baseName": "transamnotification",
+    "buildTool": "maven",
+    "cacheProvider": "no",
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "devServerPort": 4203,
+    "enableHibernateCache": false,
+    "entities": ["Notification"],
+    "jhipsterVersion": "8.9.0",
+    "jwtSecretKey": "N2MwZDUxNjU5YzYxZDJiOWNiMWJjNWIwMDA4ZTNiY2RjMWMxNmNlYzkwNmFkYjJiMjI3NmUxZjUzZDkxM2Q2OTU0ZDYyNTRlNDZhZDIyOWEyZmZhMTM2OGY5YzA2YjY5MjFlZWU1MGM3NDFkZGM1ODM3MDY2YjcyYjVjNDM1NmQ=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1740325098000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "com.transam.notification",
+    "prodDatabaseType": "mongodb",
+    "reactive": true,
+    "serverPort": "8082",
+    "serviceDiscoveryType": "no",
+    "skipCommitHook": true
+  }
+}

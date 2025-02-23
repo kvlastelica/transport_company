@@ -1,0 +1,9 @@
+{
+  "transamstoreApp": {
+    "CustomerType": {
+      "null": "",
+      "INDIVIDUAL": "INDIVIDUAL",
+      "BUSINESS": "BUSINESS"
+    }
+  }
+}

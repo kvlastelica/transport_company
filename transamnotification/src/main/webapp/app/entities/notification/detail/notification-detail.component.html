@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (notification(); as notificationRef) {
+      <div>
+        <h2 data-cy="notificationDetailsHeading">
+          <span jhiTranslate="transamnotificationApp.notification.detail.title">Notification</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="transamnotificationApp.notification.id">Id</span></dt>
+          <dd>
+            <span>{{ notificationRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamnotificationApp.notification.date">Date</span></dt>
+          <dd>
+            <span>{{ notificationRef.date | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamnotificationApp.notification.details">Details</span></dt>
+          <dd>
+            <span>{{ notificationRef.details }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamnotificationApp.notification.sentDate">Sent Date</span></dt>
+          <dd>
+            <span>{{ notificationRef.sentDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamnotificationApp.notification.format">Format</span></dt>
+          <dd>
+            <span [jhiTranslate]="'transamnotificationApp.NotificationType.' + (notificationRef.format ?? 'null')">{{
+              { null: '', EMAIL: 'EMAIL', SMS: 'SMS', PARCEL: 'PARCEL' }[notificationRef.format ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamnotificationApp.notification.userId">User Id</span></dt>
+          <dd>
+            <span>{{ notificationRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamnotificationApp.notification.productId">Product Id</span></dt>
+          <dd>
+            <span>{{ notificationRef.productId }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamnotificationApp.notification.user">User</span></dt>
+          <dd>
+            <span>{{ notificationRef.user?.id }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/notification', notificationRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

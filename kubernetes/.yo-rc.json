@@ -1,0 +1,26 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "transaminvoice",
+      "transamnotification",
+      "transamstore",
+      "transambackoffice"
+    ],
+    "clusteredDbApps": [],
+    "dbRandomPassword": "436c181b1f7a1337b091bae918afdd2664e3c4163e894db6f00e13e272bf",
+    "deploymentType": "kubernetes",
+    "directoryPath": "../",
+    "dockerPushCommand": "docker push",
+    "dockerRepositoryName": "transam",
+    "ingressDomain": "",
+    "istio": false,
+    "jhipsterVersion": "8.9.0",
+    "jwtSecretKey": "YmQ1OWQxYWQ0YzE3ZWFjYzFiNTE4YjA4YzU0ZTg3ZTMwYWFlYzYzZDNmZDVhZDBiYjJmNTE0YzIxMGFjMDk5ZDRjNDdiMmFlYzE1MTUwZTAxMzA4NzFkNjE4OWEwYmMwNDEyMQ==",
+    "kubernetesNamespace": "default",
+    "kubernetesServiceType": "LoadBalancer",
+    "kubernetesStorageClassName": "",
+    "kubernetesUseDynamicStorage": false,
+    "monitoring": "no",
+    "serviceDiscoveryType": "consul"
+  }
+}

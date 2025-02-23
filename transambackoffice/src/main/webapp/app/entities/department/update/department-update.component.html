@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-department-heading"
+        data-cy="DepartmentCreateUpdateHeading"
+        jhiTranslate="transambackofficeApp.department.home.createOrEditLabel"
+      >
+        Create or edit a Department
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="transambackofficeApp.department.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let departmentNameRef = editForm.get('departmentName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_departmentName" jhiTranslate="transambackofficeApp.department.departmentName"
+            >Department Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="departmentName"
+            id="field_departmentName"
+            data-cy="departmentName"
+            formControlName="departmentName"
+          />
+          @if (departmentNameRef.invalid && (departmentNameRef.dirty || departmentNameRef.touched)) {
+            <div>
+              @if (editForm.get('departmentName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_location" jhiTranslate="transambackofficeApp.department.location">Location</label>
+          <input type="text" class="form-control" name="location" id="field_location" data-cy="location" formControlName="location" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_division" jhiTranslate="transambackofficeApp.department.division">Division</label>
+          <input type="text" class="form-control" name="division" id="field_division" data-cy="division" formControlName="division" />
+        </div>
+
+        @let formatRef = editForm.get('format')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_format" jhiTranslate="transambackofficeApp.department.format">Format</label>
+          <select class="form-control" name="format" formControlName="format" id="field_format" data-cy="format">
+            <option [ngValue]="null">{{ 'transambackofficeApp.DepartmentType.null' | translate }}</option>
+            @for (departmentType of departmentTypeValues; track $index) {
+              <option [value]="departmentType">{{ 'transambackofficeApp.DepartmentType.' + departmentType | translate }}</option>
+            }
+          </select>
+          @if (formatRef.invalid && (formatRef.dirty || formatRef.touched)) {
+            <div>
+              @if (editForm.get('format')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

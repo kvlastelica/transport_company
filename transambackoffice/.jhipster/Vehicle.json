@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20250223154018"
+  },
+  "applications": ["transambackoffice"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "format",
+      "fieldType": "VehicleType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CAR,VAN,BUS,TRUCK,SHIP,PLANE"
+    }
+  ],
+  "name": "Vehicle",
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "route",
+      "otherEntityRelationshipName": "vehicle",
+      "relationshipName": "route",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

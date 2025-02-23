@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 2,
+    "applicationType": "gateway",
+    "authenticationType": "jwt",
+    "baseName": "transaminvoice",
+    "buildTool": "maven",
+    "cacheProvider": "no",
+    "devServerPort": 4202,
+    "entities": ["Invoice"],
+    "jhipsterVersion": "8.9.0",
+    "jwtSecretKey": "MjM2MzIxNjQ1M2YxODAwNGMxZWZlODMxYzdlNjc2MDQ2M2I0MjU5YmQ3MjIyNDYwMzkwNTkwZmVkNGVhNjY5ZTBhNTBhNzRhNDZiMmMxYzA4ZDJjNzVkZGJiNGUxMTU5OTNhN2ExN2UyYTE5M2Y2MmNlZWU4ZGEzNTM3MzQ4NWY=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1740325098000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "com.transam.invoice",
+    "prodDatabaseType": "mysql",
+    "reactive": true,
+    "serverPort": "8081",
+    "serviceDiscoveryType": "no",
+    "skipCommitHook": true
+  }
+}

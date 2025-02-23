@@ -1,0 +1,192 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-route-heading" data-cy="RouteCreateUpdateHeading" jhiTranslate="transambackofficeApp.route.home.createOrEditLabel">
+        Create or edit a Route
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="transambackofficeApp.route.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let codeRef = editForm.get('code')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_code" jhiTranslate="transambackofficeApp.route.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (codeRef.invalid && (codeRef.dirty || codeRef.touched)) {
+            <div>
+              @if (editForm.get('code')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let descriptionRef = editForm.get('description')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="transambackofficeApp.route.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (descriptionRef.invalid && (descriptionRef.dirty || descriptionRef.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let startRef = editForm.get('start')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_start" jhiTranslate="transambackofficeApp.route.start">Start</label>
+          <input type="text" class="form-control" name="start" id="field_start" data-cy="start" formControlName="start" />
+          @if (startRef.invalid && (startRef.dirty || startRef.touched)) {
+            <div>
+              @if (editForm.get('start')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let destinationRef = editForm.get('destination')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_destination" jhiTranslate="transambackofficeApp.route.destination">Destination</label>
+          <input
+            type="text"
+            class="form-control"
+            name="destination"
+            id="field_destination"
+            data-cy="destination"
+            formControlName="destination"
+          />
+          @if (destinationRef.invalid && (destinationRef.dirty || destinationRef.touched)) {
+            <div>
+              @if (editForm.get('destination')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let passengerCapacityRef = editForm.get('passengerCapacity')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_passengerCapacity" jhiTranslate="transambackofficeApp.route.passengerCapacity"
+            >Passenger Capacity</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="passengerCapacity"
+            id="field_passengerCapacity"
+            data-cy="passengerCapacity"
+            formControlName="passengerCapacity"
+          />
+          @if (passengerCapacityRef.invalid && (passengerCapacityRef.dirty || passengerCapacityRef.touched)) {
+            <div>
+              @if (editForm.get('passengerCapacity')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('passengerCapacity')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let parcelTotalWeightRef = editForm.get('parcelTotalWeight')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_parcelTotalWeight" jhiTranslate="transambackofficeApp.route.parcelTotalWeight"
+            >Parcel Total Weight</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="parcelTotalWeight"
+            id="field_parcelTotalWeight"
+            data-cy="parcelTotalWeight"
+            formControlName="parcelTotalWeight"
+          />
+          @if (parcelTotalWeightRef.invalid && (parcelTotalWeightRef.dirty || parcelTotalWeightRef.touched)) {
+            <div>
+              @if (editForm.get('parcelTotalWeight')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('parcelTotalWeight')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="field_employees" jhiTranslate="transambackofficeApp.route.employee">Employee</label>
+          <select
+            class="form-control"
+            id="field_employees"
+            data-cy="employee"
+            multiple
+            name="employees"
+            formControlName="employees"
+            [compareWith]="compareEmployee"
+          >
+            @for (employeeOption of employeesSharedCollection; track $index) {
+              <option [ngValue]="employeeOption">{{ employeeOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_vehicles" jhiTranslate="transambackofficeApp.route.vehicle">Vehicle</label>
+          <select
+            class="form-control"
+            id="field_vehicles"
+            data-cy="vehicle"
+            multiple
+            name="vehicles"
+            formControlName="vehicles"
+            [compareWith]="compareVehicle"
+          >
+            @for (vehicleOption of vehiclesSharedCollection; track $index) {
+              <option [ngValue]="vehicleOption">{{ vehicleOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

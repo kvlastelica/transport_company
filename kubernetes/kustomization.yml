@@ -1,0 +1,27 @@
+commonLabels:
+  app.kubernetes.io/genereted-by: JHipster
+
+resources:
+  # Individual apps
+  - transaminvoice-k8s/transaminvoice-deployment.yml
+  - transaminvoice-k8s/transaminvoice-service.yml
+  - transaminvoice-k8s/transaminvoice-mysql.yml
+  - transaminvoice-k8s/jwt-secret.yml
+  - transamnotification-k8s/transamnotification-deployment.yml
+  - transamnotification-k8s/transamnotification-service.yml
+  - transamnotification-k8s/transamnotification-mongodb.yml
+  - transamnotification-k8s/jwt-secret.yml
+  - transamstore-k8s/transamstore-deployment.yml
+  - transamstore-k8s/transamstore-service.yml
+  - transamstore-k8s/transamstore-mysql.yml
+  - transamstore-k8s/jwt-secret.yml
+  - transambackoffice-k8s/transambackoffice-deployment.yml
+  - transambackoffice-k8s/transambackoffice-service.yml
+  - transambackoffice-k8s/transambackoffice-mysql.yml
+  - transambackoffice-k8s/jwt-secret.yml
+  # service discovery eureka/consul
+  - registry-k8s/consul.yml
+  - registry-k8s/consul-config-loader.yml
+  - registry-k8s/application-configmap.yml
+
+patchesJson6902:

@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ticketOrder(); as ticketOrderRef) {
+      <div>
+        <h2 data-cy="ticketOrderDetailsHeading"><span jhiTranslate="transamstoreApp.ticketOrder.detail.title">Ticket Order</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ ticketOrderRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticketOrder.placedDate">Placed Date</span></dt>
+          <dd>
+            <span>{{ ticketOrderRef.placedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticketOrder.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'transamstoreApp.OrderStatus.' + (ticketOrderRef.status ?? 'null')">{{
+              { null: '', COMPLETED: 'COMPLETED', PENDING: 'PENDING', CANCELLED: 'CANCELLED' }[ticketOrderRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticketOrder.code">Code</span></dt>
+          <dd>
+            <span>{{ ticketOrderRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticketOrder.invoiceId">Invoice Id</span></dt>
+          <dd>
+            <span>{{ ticketOrderRef.invoiceId }}</span>
+          </dd>
+          <dt><span jhiTranslate="transamstoreApp.ticketOrder.customer">Customer</span></dt>
+          <dd>
+            @if (ticketOrder()!.customer) {
+              <div>
+                <a [routerLink]="['/customer', ticketOrder()!.customer?.id, 'view']">{{ ticketOrderRef.customer?.email }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ticket-order', ticketOrderRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "transaminvoice",
+      "transamnotification",
+      "transamstore",
+      "transambackoffice"
+    ],
+    "clusteredDbApps": [],
+    "deploymentType": "docker-compose",
+    "directoryPath": "../",
+    "dockerRepositoryName": "transam",
+    "gatewayType": "SpringCloudGateway",
+    "jhipsterVersion": "8.9.0",
+    "jwtSecretKey": "ZGQyNjNhZmU2MTMwZmI5MzQ5NmNjMzE5Y2E2OTZhODIzOTcxYzBlM2U0MTRhMmUwNDRkYjM4M2RjZTEzOTk2YjVmY2JlOWQwMTk3NmU2Y2NhZjE0MmVhMWRkNjIzMDRkZWEwNA==",
+    "monitoring": "no",
+    "serviceDiscoveryType": "consul"
+  }
+}

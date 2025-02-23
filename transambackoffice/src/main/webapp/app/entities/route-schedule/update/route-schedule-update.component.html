@@ -1,0 +1,152 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-route-schedule-heading"
+        data-cy="RouteScheduleCreateUpdateHeading"
+        jhiTranslate="transambackofficeApp.routeSchedule.home.createOrEditLabel"
+      >
+        Create or edit a Route Schedule
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="transambackofficeApp.routeSchedule.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let codeRef = editForm.get('code')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_code" jhiTranslate="transambackofficeApp.routeSchedule.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (codeRef.invalid && (codeRef.dirty || codeRef.touched)) {
+            <div>
+              @if (editForm.get('code')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let descriptionRef = editForm.get('description')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="transambackofficeApp.routeSchedule.description"
+            >Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (descriptionRef.invalid && (descriptionRef.dirty || descriptionRef.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let departureRef = editForm.get('departure')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_departure" jhiTranslate="transambackofficeApp.routeSchedule.departure">Departure</label>
+          <div class="d-flex">
+            <input
+              id="field_departure"
+              data-cy="departure"
+              type="datetime-local"
+              class="form-control"
+              name="departure"
+              formControlName="departure"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (departureRef.invalid && (departureRef.dirty || departureRef.touched)) {
+            <div>
+              @if (editForm.get('departure')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('departure')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let arrivalRef = editForm.get('arrival')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_arrival" jhiTranslate="transambackofficeApp.routeSchedule.arrival">Arrival</label>
+          <div class="d-flex">
+            <input
+              id="field_arrival"
+              data-cy="arrival"
+              type="datetime-local"
+              class="form-control"
+              name="arrival"
+              formControlName="arrival"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (arrivalRef.invalid && (arrivalRef.dirty || arrivalRef.touched)) {
+            <div>
+              @if (editForm.get('arrival')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('arrival')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_route" jhiTranslate="transambackofficeApp.routeSchedule.route">Route</label>
+          <select class="form-control" id="field_route" data-cy="route" name="route" formControlName="route" [compareWith]="compareRoute">
+            @if (editForm.get(['route'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (routeOption of routesSharedCollection; track $index) {
+              <option [ngValue]="routeOption">{{ routeOption.code }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['route'])!.invalid && (editForm.get(['route'])!.dirty || editForm.get(['route'])!.touched)) {
+          <div>
+            @if (editForm.get(['route'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20250223154218"
+  },
+  "applications": ["transambackoffice"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "departure",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "arrival",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "RouteSchedule",
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "route",
+      "otherEntityRelationshipName": "routeschedule",
+      "relationshipName": "route",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

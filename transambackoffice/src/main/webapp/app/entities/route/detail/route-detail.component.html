@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (route(); as routeRef) {
+      <div>
+        <h2 data-cy="routeDetailsHeading"><span jhiTranslate="transambackofficeApp.route.detail.title">Route</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ routeRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.route.code">Code</span></dt>
+          <dd>
+            <span>{{ routeRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.route.description">Description</span></dt>
+          <dd>
+            <span>{{ routeRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.route.start">Start</span></dt>
+          <dd>
+            <span>{{ routeRef.start }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.route.destination">Destination</span></dt>
+          <dd>
+            <span>{{ routeRef.destination }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.route.passengerCapacity">Passenger Capacity</span></dt>
+          <dd>
+            <span>{{ routeRef.passengerCapacity }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.route.parcelTotalWeight">Parcel Total Weight</span></dt>
+          <dd>
+            <span>{{ routeRef.parcelTotalWeight }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.route.employee">Employee</span></dt>
+          <dd>
+            @for (employee of routeRef.employees; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/employee', employee.id, 'view']">{{ employee?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.route.vehicle">Vehicle</span></dt>
+          <dd>
+            @for (vehicle of routeRef.vehicles; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/vehicle', vehicle.id, 'view']">{{ vehicle?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/route', routeRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

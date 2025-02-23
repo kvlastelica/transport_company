@@ -1,0 +1,152 @@
+<div>
+  <h2 id="page-heading" data-cy="RouteHeading">
+    <span jhiTranslate="transambackofficeApp.route.home.title">Routes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="transambackofficeApp.route.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-route"
+        [routerLink]="['/route/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="transambackofficeApp.route.home.createLabel">Create a new Route</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (routes().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="transambackofficeApp.route.home.notFound">No Routes found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.route.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.route.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="start">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.route.start">Start</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="destination">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.route.destination">Destination</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="passengerCapacity">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.route.passengerCapacity">Passenger Capacity</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="parcelTotalWeight">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.route.parcelTotalWeight">Parcel Total Weight</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="employee.id">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.route.employee">Employee</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="vehicle.id">
+              <div class="d-flex">
+                <span jhiTranslate="transambackofficeApp.route.vehicle">Vehicle</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (route of routes(); track trackId(route)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/route', route.id, 'view']">{{ route.id }}</a>
+              </td>
+              <td>{{ route.code }}</td>
+              <td>{{ route.description }}</td>
+              <td>{{ route.start }}</td>
+              <td>{{ route.destination }}</td>
+              <td>{{ route.passengerCapacity }}</td>
+              <td>{{ route.parcelTotalWeight }}</td>
+              <td>
+                @for (employee of route.employees; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/employee', employee.id, 'view']">{{ employee.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (vehicle of route.vehicles; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/vehicle', vehicle.id, 'view']">{{ vehicle.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/route', route.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/route', route.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(route)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

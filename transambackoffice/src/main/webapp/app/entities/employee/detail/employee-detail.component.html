@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (employee(); as employeeRef) {
+      <div>
+        <h2 data-cy="employeeDetailsHeading"><span jhiTranslate="transambackofficeApp.employee.detail.title">Employee</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ employeeRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.employee.employeCode">Employe Code</span></dt>
+          <dd>
+            <span>{{ employeeRef.employeCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.employee.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ employeeRef.firstName }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.employee.lastName">Last Name</span></dt>
+          <dd>
+            <span>{{ employeeRef.lastName }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.employee.jobTitle">Job Title</span></dt>
+          <dd>
+            <span>{{ employeeRef.jobTitle }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.employee.user">User</span></dt>
+          <dd>
+            <span>{{ employeeRef.user?.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.employee.department">Department</span></dt>
+          <dd>
+            @if (employee()!.department) {
+              <div>
+                <a [routerLink]="['/department', employee()!.department?.id, 'view']">{{ employeeRef.department?.departmentName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="transambackofficeApp.employee.route">Route</span></dt>
+          <dd>
+            @for (route of employeeRef.routes; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/route', route.id, 'view']">{{ route?.code }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/employee', employeeRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
